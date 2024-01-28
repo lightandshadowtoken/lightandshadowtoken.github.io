@@ -1,16 +1,30 @@
 import { Modal } from 'react-bootstrap'
 import {useEffect, useState} from "react";
 import axios from 'axios';
-
-// blockchain
-import connectToMetaMask from "../../utils/connectToMetaMask";
-import contract from "../../utils/contract";
-import web3 from "../../utils/web3"
+import { ethers } from 'ethers';
 
 // images
 import logo from '../../img/logo.png';
 
 function Home(props) {
+    const contractAddress = '0x7a0c0d7c02bb2d5a9db7020371ed4816028e9cf5';
+    const contractAbi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"allowance","type":"uint256"},{"internalType":"uint256","name":"needed","type":"uint256"}],"name":"ERC20InsufficientAllowance","type":"error"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"uint256","name":"balance","type":"uint256"},{"internalType":"uint256","name":"needed","type":"uint256"}],"name":"ERC20InsufficientBalance","type":"error"},{"inputs":[{"internalType":"address","name":"approver","type":"address"}],"name":"ERC20InvalidApprover","type":"error"},{"inputs":[{"internalType":"address","name":"receiver","type":"address"}],"name":"ERC20InvalidReceiver","type":"error"},{"inputs":[{"internalType":"address","name":"sender","type":"address"}],"name":"ERC20InvalidSender","type":"error"},{"inputs":[{"internalType":"address","name":"spender","type":"address"}],"name":"ERC20InvalidSpender","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":false,"internalType":"uint256","name":"principal","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"penalty","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"interest","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"penaltyReward","type":"uint256"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ClaimedVested","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"RewardsDeposited","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"durationIndex","type":"uint256"}],"name":"Staked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Vested","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"VestingStartTimestampSet","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"value","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"burnFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"depositRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"stakeIndex","type":"uint256"}],"name":"getStake","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"startTime","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"},{"internalType":"uint256","name":"reward","type":"uint256"},{"internalType":"uint256","name":"penalty","type":"uint256"},{"internalType":"uint256","name":"penaltyReward","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"getStakeCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalPenaltiesAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalStakingRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"getVestedAmount","outputs":[{"internalType":"uint256","name":"vestedAmount","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"initializeVesting","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"marketingFund","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"rewardsPool","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_newMarketingFundAddress","type":"address"}],"name":"setMarketingFundAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"setVestingStartTimestamp","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"stakeDurations","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"stakeRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"durationIndex","type":"uint256"}],"name":"stakeTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalStakedTokens","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"stakeIndex","type":"uint256"}],"name":"withdrawAndClaim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawMarketingFund","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+
+    const correctNetworkId = 97; // 56 or 97
+
+    const initializeContract = async () => {
+        let newContract = null;
+
+        try {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            newContract = new ethers.Contract(contractAddress, contractAbi, provider);
+        } catch (error) {
+            console.error('Error initializing contract:', error);
+        }
+
+        return newContract;
+    };
+
     const [inputsValues, setInputsValues] = useState({
         addressIsConnected: false,
         address: null,
@@ -73,69 +87,98 @@ function Home(props) {
     };
 
     let connectWallet = async function() {
-        document.getElementById('connect-wallet').innerHTML = "CONNECTING";
+        await checkNetwork();
 
-        let address = await connectToMetaMask();
+        let connectWalletLabel = document.getElementById('connect-wallet');
 
-        if(address) {
-            await getAddressDetails(address);
-        } else {
-            document.getElementById('connect-wallet').innerHTML = "CONNECT WALLET";
+        if(connectWalletLabel) {
+            connectWalletLabel.innerHTML = "CONNECTING";
         }
+
+        let _contract = await initializeContract();
+        let _address = await connectAccount(_contract);
+
+        if(connectWalletLabel) {
+            connectWalletLabel.innerHTML = "CONNECT WALLET";
+        }
+
+        return [_contract, _address];
     };
 
-    let getAddressDetails = async function(address) {
-        let balance;
+    let connectAccount = async function(_contract) {
+        let address = null;
+        let connectWalletLabel = document.getElementById('connect-wallet');
 
-        await contract.methods.balanceOf(address).call()
-            .then(function(data) {
-                // eslint-disable-next-line no-undef
-                balance = parseInt(BigInt(data) / BigInt(1000000000000000000));
-            });
+        try {
+            if (window.ethereum) {
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+
+                if (accounts && accounts.length > 0) {
+                    const connectedAddress = accounts[0];
+                    await getAddressDetails(connectedAddress, _contract);
+                    address = connectedAddress;
+                }
+            } else {
+                handleShowModalError();
+                document.getElementById('error-message').innerHTML = "MetaMask not installed.<br/> Please install MetaMask from <a href='https://metamask.io' class='text-color-2'>https://metamask.io</a> to proceed.";
+
+                connectWalletLabel.innerHTML = "CONNECT WALLET";
+            }
+        } catch (error) {
+            handleShowModalError();
+            document.getElementById('error-message').innerHTML = error;
+
+            connectWalletLabel.innerHTML = "CONNECT WALLET";
+        }
+
+        return address;
+    };
+
+    let getAddressDetails = async function(address, _contract) {
+        let balance = await _contract.balanceOf(address);
+        balance = parseInt(BigInt(balance) / BigInt(1000000000000000000));
 
         let stakes = [];
         let totalStakedAmount = 0;
         let totalAccumulatedRewards = 0;
         let totalRewardsToBeReceived = 0;
 
-        await contract.methods.getStakeCount(address).call()
-            .then(async function(data) {
-                let stakeCount = parseInt(data);
+        let stakeCount = parseInt(await _contract.getStakeCount(address));
 
-                for(let i = stakeCount - 1; i >= 0; i--) {
-                    await contract.methods.getStake(address, i).call()
-                        .then(function(data) {
-                            stakes.push({
-                                index: i,
-                                amount: data.amount,
-                                duration: data.duration,
-                                startTime: data.startTime,
-                                claimed: data.claimed,
-                                reward: data.reward,
-                                penalty: data.penalty,
-                                penaltyReward: data.penaltyReward,
-                                totalWithdrawalAmount: parseInt(web3.utils.fromWei(data.amount, 'ether')) + parseInt(web3.utils.fromWei(data.reward, 'ether')) + parseInt(web3.utils.fromWei(data.penaltyReward, 'ether')) - parseInt(web3.utils.fromWei(data.penalty, 'ether')),
-                            });
+        for(let i = stakeCount - 1; i >= 0; i--) {
+            let data = await _contract.getStake(address, i);
 
-                            if(!data.claimed) {
-                                let percentage;
-                                if(parseInt(data.duration) === 30) {
-                                    percentage = 0.003125;
-                                } else if(parseInt(data.duration) === 90) {
-                                    percentage = 0.8750;
-                                } else if(parseInt(data.duration) === 180) {
-                                    percentage = 0.065;
-                                } else if(parseInt(data.duration) === 360) {
-                                    percentage = 0.26;
-                                }
-
-                                totalStakedAmount += parseInt(web3.utils.fromWei(data.amount, 'ether'));
-                                totalAccumulatedRewards += parseInt(web3.utils.fromWei(data.reward, 'ether'));
-                                totalRewardsToBeReceived += (parseInt(web3.utils.fromWei(data.amount, 'ether')) * percentage) + parseInt(web3.utils.fromWei(data.penaltyReward, 'ether'));
-                            }
-                        });
-                }
+            stakes.push({
+                index: i,
+                amount: data.amount,
+                duration: data.duration,
+                startTime: data.startTime,
+                claimed: data.claimed,
+                reward: data.reward,
+                penalty: data.penalty,
+                penaltyReward: data.penaltyReward,
+                totalWithdrawalAmount: parseInt(ethers.utils.formatUnits(data.amount, 'ether')) + parseInt(ethers.utils.formatUnits(data.reward, 'ether')) + parseInt(ethers.utils.formatUnits(data.penaltyReward, 'ether')) - parseInt(ethers.utils.formatUnits(data.penalty, 'ether')),
             });
+
+            if(!data.claimed) {
+                let percentage;
+                if(parseInt(data.duration) === 30) {
+                    percentage = 0.003125;
+                } else if(parseInt(data.duration) === 90) {
+                    percentage = 0.8750;
+                } else if(parseInt(data.duration) === 180) {
+                    percentage = 0.065;
+                } else if(parseInt(data.duration) === 360) {
+                    percentage = 0.26;
+                }
+
+                totalStakedAmount += parseInt(ethers.utils.formatUnits(data.amount, 'ether'));
+                totalAccumulatedRewards += parseInt(ethers.utils.formatUnits(data.reward, 'ether'));
+                totalRewardsToBeReceived += (parseInt(ethers.utils.formatUnits(data.amount, 'ether')) * percentage) + parseInt(ethers.utils.formatUnits(data.penaltyReward, 'ether'));
+            }
+        }
 
         let ranks = await storeAddress(address);
 
@@ -152,36 +195,40 @@ function Home(props) {
     };
 
     let stake = async function() {
-        let address = await connectToMetaMask();
+        let [ _contract, _address ] = await connectWallet();
 
-        if(address) {
-            await getAddressDetails(address);
+        if(_address) {
+            await getAddressDetails(_address, _contract);
 
-            let stakeAmount = web3.utils.toWei((inputsValues.stakeAmount).toString(), 'ether');
+            let stakeAmount = ethers.utils.parseUnits((inputsValues.stakeAmount).toString(), 'ether');
             let durationIndex = parseInt(inputsValues.stakingOption);
 
             try {
-                await contract.methods.stakeTokens(stakeAmount, durationIndex).send({
-                    from: address
-                }).on('transactionHash', function(hash) {
-                    handleShowModalProcessing();
-                }).on('error', function(error) {
-                    handleShowModalError();
-                    document.getElementById('error-message').innerHTML = error.message;
-                }).then(async function(receipt) {
-                    await getAddressDetails(address);
+                handleShowModalProcessing();
 
-                    handleCloseModalProcessing();
-                    handleShowModalSuccess();
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner(accounts[0]);
+                const connectedContract = _contract.connect(signer);
+                const transaction = await connectedContract.stakeTokens(stakeAmount, durationIndex);
 
-                    document.getElementById('success-message').innerHTML = "You have successfully staked " + numberFormat(inputsValues.stakeAmount, false) + "&nbsp;KEY.";
+                await transaction.wait();
+                await getAddressDetails(_address, _contract);
 
-                    let ranks = await storeAddress(address);
+                handleCloseModalProcessing();
+                handleShowModalSuccess();
 
-                    let newInputsValues = { ...inputsValues, ranks: ranks };
-                    setInputsValues(newInputsValues);
-                });
-            } catch (e) {}
+                document.getElementById('success-message').innerHTML = "You have successfully staked " + numberFormat(inputsValues.stakeAmount, false) + "&nbsp;KEY.";
+
+                // let ranks = await storeAddress(_address);
+                //
+                // let newInputsValues = { ...inputsValues, ranks: ranks };
+                // setInputsValues(newInputsValues);
+            } catch (error) {
+                handleCloseModalProcessing();
+                handleShowModalError();
+                document.getElementById('error-message').innerHTML = error.message;
+            }
         } else {
             handleShowModalError();
             document.getElementById('error-message').innerHTML = "Invalid Address";
@@ -189,34 +236,36 @@ function Home(props) {
     };
 
     let unstake = async function(stakeIndex, forced) {
-        let address = await connectToMetaMask();
+        let [ _contract, _address ] = await connectWallet();
 
-        if(address) {
+        if(_address) {
             for(let i = 0; i < inputsValues.stakes.length; i++) {
                 if(inputsValues.stakes[i].index === stakeIndex) {
-                    console.log(inputsValues.stakes[i]);
-                    if(parseInt(web3.utils.fromWei(inputsValues.stakes[i].penalty, 'ether')) === 0 || forced) {
+                    if(parseInt(ethers.utils.formatUnits(inputsValues.stakes[i].penalty, 'ether')) === 0 || forced) {
                         if(forced) {
                             handleCloseModalPenalty();
                         }
 
                         try {
-                            await contract.methods.withdrawAndClaim(stakeIndex).send({
-                                from: address
-                            }).on('transactionHash', function(hash) {
-                                handleShowModalProcessing();
-                            }).on('error', function(error) {
-                                handleShowModalError();
-                                document.getElementById('error-message').innerHTML = error.message;
-                            }).then(async function(receipt) {
-                                await getAddressDetails(address);
+                            handleShowModalProcessing();
 
-                                handleCloseModalProcessing();
-                                handleShowModalSuccess();
+                            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                            const provider = new ethers.providers.Web3Provider(window.ethereum);
+                            const signer = provider.getSigner(accounts[0]);
+                            const connectedContract = _contract.connect(signer);
+                            const transaction = await connectedContract.withdrawAndClaim(stakeIndex);
 
-                                document.getElementById('success-message').innerHTML = "You have successfully claimed your stake.";
-                            });
-                        } catch (e) {}
+                            await transaction.wait();
+                            await getAddressDetails(_address, _contract);
+
+                            handleCloseModalProcessing();
+                            handleShowModalSuccess();
+
+                            document.getElementById('success-message').innerHTML = "You have successfully claimed your stake.";
+                        } catch (error) {
+                            handleShowModalError();
+                            document.getElementById('error-message').innerHTML = error.message;
+                        }
                     } else {
                         setInputsValues({ ...inputsValues, unstake: inputsValues.stakes[i] });
                         handleShowModalPenalty();
@@ -261,9 +310,34 @@ function Home(props) {
         // setInputsValues({ ...inputsValues, ranks: lightAndShadowStakes });
     };
 
-    useEffect(async () => {
-        await getLeaderboards();
-    }, []);
+    const checkNetwork = async () => {
+        try {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const network = await provider.getNetwork();
+
+            if (network.chainId !== correctNetworkId) {
+                await switchToCorrectNetwork(correctNetworkId);
+            }
+        } catch (error) {
+            console.error('Error checking network:', error.message);
+        }
+    };
+
+    const switchToCorrectNetwork = async (targetNetworkId) => {
+        try {
+            await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: `0x${targetNetworkId.toString(16)}` }], // Convert to hex
+            });
+        } catch (error) {
+            console.error('Error switching network:', error.message);
+            // Handle the error, for example, show a message to the user
+        }
+    };
+
+    // useEffect(async () => {
+    //     await getLeaderboards();
+    // }, []);
 
     return (
         <div className="home bg-color-1">
@@ -285,7 +359,7 @@ function Home(props) {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a href={ "https://pancakeswap.finance/swap?inputCurrency=eth&outputCurrency=" + contract.options.address } target="_blank" rel="noreferrer" className="btn btn-custom-3 px-4" >BUY LIGHT &amp; SHADOW</a>
+                                <a href={ "https://pancakeswap.finance/swap?inputCurrency=eth&outputCurrency=" + contractAddress } target="_blank" rel="noreferrer" className="btn btn-custom-3 px-4" >BUY LIGHT &amp; SHADOW</a>
                             </li>
                         </ul>
                     </div>
@@ -452,10 +526,10 @@ function Home(props) {
                                     inputsValues.stakes.map((stake, index) => (
                                         <tr key={ index }>
                                             <td className="text-center align-middle p-3 text-end inter">{ stake.index + 1 }</td>
-                                            <td className="text-center align-middle p-3 text-end inter">{ numberFormat(web3.utils.fromWei(stake.amount, 'ether'), false) } KEY</td>
+                                            <td className="text-center align-middle p-3 text-end inter">{ numberFormat(ethers.utils.formatUnits(stake.amount, 'ether'), false) } KEY</td>
                                             <td className="text-center align-middle p-3 text-end inter">{ stake.duration / 30 } Months</td>
                                             <td className="text-center align-middle p-3 text-end inter">{ new Date(stake.startTime * 1000).toLocaleDateString('en-US', {month: 'long', day: '2-digit', year: 'numeric'}) }</td>
-                                            <td className="text-center align-middle p-3 inter text-end">{ numberFormat(web3.utils.fromWei(stake.reward, 'ether'), false) } KEY</td>
+                                            <td className="text-center align-middle p-3 inter text-end">{ numberFormat(ethers.utils.formatUnits(stake.reward, 'ether'), false) } KEY</td>
                                             <td className="text-center align-middle p-3 inter">{ (stake.claimed) ? 'Claimed' : ((Date.parse(new Date()) > Date.parse(new Date(stake.startTime * 1000)) + (stake.duration * 24 * 60 * 60 * 1000)) ? 'Completed' : 'Ongoing') }</td>
                                             <td className="text-center align-middle p-3 text-center">
                                                 {
@@ -490,7 +564,7 @@ function Home(props) {
             <Modal show={showModalSuccess} onHide={handleCloseModalSuccess} className="" centered>
                 <div className="modal-body p-4 py-5 p-sm-5 border-0">
                     <div className="text-center">
-                        <i className="fas fa-check-circle font-size-400 text-color-1 mb-3"></i>
+                        <i className="fas fa-check-circle font-size-400 text-color-2 mb-3"></i>
                         <p className="mb-0 font-size-110 mb-4 pb-2" id="success-message"></p>
 
                         <button className="btn btn-custom-3 px-5 py-2 font-size-110 mx-1" onClick={handleCloseModalSuccess}>Okay</button>
@@ -501,7 +575,7 @@ function Home(props) {
             <Modal show={showModalError} onHide={handleCloseModalError} className="" centered>
                 <div className="modal-body p-4 py-5 p-sm-5">
                     <div className="text-center">
-                        <i className="fas fa-times-circle font-size-400 text-color-1 mb-3"></i>
+                        <i className="fas fa-times-circle font-size-400 text-color-2 mb-3"></i>
                         <p className="mb-0 font-size-110 mb-4 pb-2" id="error-message"></p>
 
                         <button className="btn btn-custom-3 px-5 py-2 font-size-110 mx-1" onClick={handleCloseModalError}>Close</button>
@@ -512,8 +586,8 @@ function Home(props) {
             <Modal show={showModalPenalty} onHide={handleCloseModalPenalty} className="" centered>
                 <div className="modal-body p-4 py-5 p-sm-5">
                     <div className="text-center">
-                        <i className="fas fa-exclamation-circle font-size-400 text-color-1 mb-3"></i>
-                        <p className="mb-0 font-size-110 mb-4 inter pb-2">You are attempting to withdraw your stake ahead of the scheduled time, resulting in a penalty of <span>{ numberFormat(parseInt(web3.utils.fromWei(inputsValues.unstake.penalty, "ether")), false) } KEY tokens</span>. After applying this penalty, you will receive a total of <span>{ numberFormat(inputsValues.unstake.totalWithdrawalAmount, false) } KEY tokens</span> from this withdrawal. Please review your decision to ensure that you understand the implications of this early withdrawal.</p>
+                        <i className="fas fa-exclamation-circle font-size-400 text-color-2 mb-3"></i>
+                        <p className="mb-0 font-size-110 mb-4 inter pb-2">You are attempting to withdraw your stake ahead of the scheduled time, resulting in a penalty of <span>{ numberFormat(parseInt(ethers.utils.formatUnits(inputsValues.unstake.penalty, 'ether')), false) } KEY tokens</span>. After applying this penalty, you will receive a total of <span>{ numberFormat(inputsValues.unstake.totalWithdrawalAmount, false) } KEY tokens</span> from this withdrawal. Please review your decision to ensure that you understand the implications of this early withdrawal.</p>
 
                         <button className="btn btn-custom-3 inter px-3 px-sm-5 py-2 font-size-100 mx-1" onClick={handleCloseModalPenalty}>Cancel</button>
                         <button className="btn btn-custom-3 inter px-3 px-sm-5 py-2 font-size-100 mx-1" onClick={() => unstake(inputsValues.unstake.index, true)}>Proceed Anyway</button>
