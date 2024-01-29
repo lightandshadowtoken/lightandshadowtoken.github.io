@@ -341,13 +341,13 @@ function Home(props) {
 
     return (
         <div className="home bg-color-1">
-            <nav className="navbar navbar-dark navbar-expand-lg bg-body-tertiary py-2" style={{"borderBottom":"1px solid rgb(48, 50, 68)"}}>
+            <nav className="navbar bg-white navbar-expand-lg bg-body-tertiary py-2" style={{"borderBottom":"1px solid rgba(48, 50, 68, 0.3)"}}>
                 <div className="container">
                     <a className="navbar-brand text-white d-flex align-items-center" href="#">
                         <div className="pe-4">
                             <img src={logo} width="50" alt="Light & Shadow" />
                         </div>
-                        <div>LIGHT &amp; SHADOW STAKING</div>
+                        <div className="text-color-2">LIGHT &amp; SHADOW STAKING</div>
                     </a>
 
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -367,23 +367,23 @@ function Home(props) {
             </nav>
 
             <div className="container py-5">
-                <div className="mb-5">
-                    <p className="font-size-140 text-white fw-bold text-center">Welcome to the Light And Shadow Token Staking Platform</p>
-                    <p className="font-size-120 text-white text-center">Embark on a Journey of Profitable Staking</p>
-                    <p className="font-size-100 text-white text-center">Discover the power of your investment with Light And Shadow Token. Our staking platform is designed to reward your commitment with competitive Annual Percentage Rates (APRs). Choose from our flexible staking options to best suit your financial goals.</p>
+                <div className="mb-5 py-4">
+                    <p className="font-size-200 text-color-2 poppins fw-bold text-center">Welcome to the Light And Shadow Token Staking Platform</p>
+                    <p className="font-size-140 text-color-2 text-center">Embark on a Journey of Profitable Staking</p>
+                    <p className="font-size-110 text-color-2 text-center">Discover the power of your investment with Light And Shadow Token. Our staking platform is designed to reward your commitment with competitive Annual Percentage Rates (APRs). Choose from our flexible staking options to best suit your financial goals.</p>
                 </div>
 
                 <div className="row mb-5">
                     <div className="col-lg-4 mb-4 mb-lg-0">
-                        <div className="bg-color-2 px-4 px-sm-5 px-lg-4 px-xxl-5 py-5">
+                        <div className="bg-white px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #071c1f"}}>
                             <div className="row align-items-center">
                                 <div className="col-sm-9 col-lg-12 col-xl-9">
-                                    <p className="text-white font-size-180 mb-0">{ inputsValues.totalStakedAmount } KEY</p>
-                                    <p className="text-white font-size-100 mb-0">Staked Amount</p>
+                                    <p className="text-color-2 font-size-180 mb-0">{ inputsValues.totalStakedAmount } KEY</p>
+                                    <p className="text-color-2 font-size-100 mb-0">Staked Amount</p>
                                 </div>
                                 <div className="col-3 d-none d-sm-block d-lg-none d-xl-block">
                                     <div className="text-center">
-                                        <i className="fa-solid fa-steak font-size-400 text-color-1"></i>
+                                        <i className="fa-solid fa-steak font-size-400 text-color-3"></i>
                                     </div>
                                 </div>
                             </div>
@@ -391,15 +391,15 @@ function Home(props) {
                     </div>
 
                     <div className="col-lg-4 mb-4 mb-lg-0">
-                        <div className="bg-color-2 px-4 px-sm-5 px-lg-4 px-xxl-5 py-5">
+                        <div className="bg-white px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #071c1f"}}>
                             <div className="row align-items-center">
                                 <div className="col-sm-9 col-lg-12 col-xl-9">
-                                    <p className="text-white font-size-180 mb-0">{ inputsValues.totalAccumulatedRewards } KEY</p>
-                                    <p className="text-white font-size-100 mb-0">Accumulated Rewards</p>
+                                    <p className="text-color-2 font-size-180 mb-0">{ inputsValues.totalAccumulatedRewards } KEY</p>
+                                    <p className="text-color-2 font-size-100 mb-0">Accumulated Rewards</p>
                                 </div>
                                 <div className="col-3 d-none d-sm-block d-lg-none d-xl-block">
                                     <div className="text-center">
-                                        <i className="fa-solid fa-coins font-size-420 text-color-1"></i>
+                                        <i className="fa-solid fa-coins font-size-420 text-color-3"></i>
                                     </div>
                                 </div>
                             </div>
@@ -407,15 +407,15 @@ function Home(props) {
                     </div>
 
                     <div className="col-lg-4">
-                        <div className="bg-color-2 px-4 px-sm-5 px-lg-4 px-xxl-5 py-5">
+                        <div className="bg-white px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #071c1f"}}>
                             <div className="row align-items-center">
                                 <div className="col-sm-9 col-lg-12 col-xl-9">
-                                    <p className="text-white font-size-180 mb-0">{ inputsValues.totalRewardsToBeReceived } KEY</p>
-                                    <p className="text-white font-size-100 mb-0">Rewards By End Of Stake</p>
+                                    <p className="text-color-2 font-size-180 mb-0">{ inputsValues.totalRewardsToBeReceived } KEY</p>
+                                    <p className="text-color-2 font-size-100 mb-0">Rewards By End Of Stake</p>
                                 </div>
                                 <div className="col-3 d-none d-sm-block d-lg-none d-xl-block">
                                     <div className="text-center">
-                                        <i className="fa-solid fa-sack-dollar font-size-420 text-color-1"></i>
+                                        <i className="fa-solid fa-sack-dollar font-size-420 text-color-3"></i>
                                     </div>
                                 </div>
                             </div>
@@ -423,9 +423,9 @@ function Home(props) {
                     </div>
                 </div>
 
-                <div className="bg-color-2 p-4 p-sm-5 mb-5">
-                    <p className="text-white font-size-150">Stake & Earn Today!</p>
-                    <p className="text-white font-size-90 font-size-lg-80 font-size-xl-90">Explore diverse staking options tailored to your financial goals. Whether you're looking for short-term gains or long-term growth, we have the perfect plan for you.</p>
+                <div className="bg-color-1 p-4 p-sm-5 mb-5 bg-white" style={{border: "1px solid #071c1f"}}>
+                    <p className="text-color-2 poppins font-weight-700 font-size-150">Stake & Earn Today!</p>
+                    <p className="text-color-2 font-size-90 font-size-lg-80 font-size-xl-90">Explore diverse staking options tailored to your financial goals. Whether you're looking for short-term gains or long-term growth, we have the perfect plan for you.</p>
 
                     {
                         !inputsValues.addressIsConnected ?
@@ -434,7 +434,7 @@ function Home(props) {
                         </div>
                         :
                         <div className="mb-3">
-                            <div className="text-white w-100 px-4 py-3" style={{"border":"1px solid rgb(48, 50, 68)"}}>Wallet Address:&nbsp;&nbsp;&nbsp;&nbsp;{ shortenAddress(6, 7, inputsValues.address) }</div>
+                            <div className="text-color-2 w-100 px-4 py-3" style={{"border":"1px solid rgb(48, 50, 68)"}}>Wallet Address:&nbsp;&nbsp;&nbsp;&nbsp;{ shortenAddress(6, 7, inputsValues.address) }</div>
                         </div>
                     }
 
@@ -458,7 +458,7 @@ function Home(props) {
                     <div className="row px-1 mb-2">
                         <div className="col-lg-8 p-2">
                             <div className="position-relative">
-                                <div className="position-absolute text-white cursor-pointer" onClick={inputMaxBalance} style={{"top":"16px", "right":"20px"}}>MAX</div>
+                                <div className="position-absolute text-color-2 cursor-pointer" onClick={inputMaxBalance} style={{"top":"16px", "right":"20px"}}>MAX</div>
                                 <input type="number" step="0" min="1" className="form-control form-control-1 ps-4 py-3" name="stakeAmount" placeholder="Enter Stake Amount" value={inputsValues.stakeAmount} onChange={handleInputChange} style={{"paddingRight":"70px"}} />
                             </div>
                         </div>
@@ -472,11 +472,11 @@ function Home(props) {
                 </div>
 
                 <div className="pb-5 px-1">
-                    <p className="text-white font-size-150 mb-3">Leaderboards</p>
+                    <p className="font-size-150 poppins font-weight-700 text-color-2 mb-3">Leaderboards</p>
                     <div className="table-responsive">
-                        <table className="table text-white mb-2">
+                        <table className="table text-color-2 mb-2 bg-white" style={{border: "1px solid #071c1f"}}>
                             <thead>
-                                <tr className="bg-color-2">
+                                <tr className="">
                                     <th className="text-center align-middle p-3">Rank</th>
                                     <th className="text-center align-middle p-3">Address</th>
                                     <th className="text-center align-middle p-3">Amount Staked</th>
@@ -496,7 +496,7 @@ function Home(props) {
                                     ))
                                 :
                                 <tr>
-                                    <td className="align-middle p-3 text-center inter" colSpan="12">No stakers yet.</td>
+                                    <td className="align-middle p-3 text-center" colSpan="12">No stakers yet.</td>
                                 </tr>
                             }
                             </tbody>
@@ -505,19 +505,19 @@ function Home(props) {
                 </div>
 
                 <div className="pb-5 px-1">
-                    <p className="text-white font-size-150 mb-3">Stake History</p>
+                    <p className="font-size-150 poppins font-weight-700 text-color-2 mb-3">Stake History</p>
                     <div className="table-responsive">
-                        <table className="table text-white mb-2">
+                        <table className="table text-color-2 mb-2 bg-white" style={{border: "1px solid #071c1f"}}>
                             <thead>
-                            <tr className="bg-color-2">
-                                <th className="text-center align-middle p-3">No.</th>
-                                <th className="text-center align-middle p-3">Amount</th>
-                                <th className="text-center align-middle p-3">Duration</th>
-                                <th className="text-center align-middle p-3">Started</th>
-                                <th className="text-center align-middle p-3">Accumulated Rewards</th>
-                                <th className="text-center align-middle p-3">Status</th>
-                                <th className="text-center align-middle p-3">Action</th>
-                            </tr>
+                                <tr className="">
+                                    <th className="text-center align-middle p-3">No.</th>
+                                    <th className="text-center align-middle p-3">Amount</th>
+                                    <th className="text-center align-middle p-3">Duration</th>
+                                    <th className="text-center align-middle p-3">Started</th>
+                                    <th className="text-center align-middle p-3">Accumulated Rewards</th>
+                                    <th className="text-center align-middle p-3">Status</th>
+                                    <th className="text-center align-middle p-3">Action</th>
+                                </tr>
                             </thead>
                             <tbody>
                             {
@@ -534,7 +534,7 @@ function Home(props) {
                                             <td className="text-center align-middle p-3 text-center">
                                                 {
                                                     !stake.claimed &&
-                                                    <button className="btn btn-custom-3 btn-sm px-3 py-2 w-100" onClick={() => unstake(stake.index, false)}>{ (Date.parse(new Date()) > Date.parse(new Date(stake.startTime * 1000)) + (stake.duration * 24 * 60 * 60 * 1000)) ? 'Claim' : 'Unstake' }</button>
+                                                    <button className="btn btn-custom-4 btn-sm px-3 py-2 w-100" onClick={() => unstake(stake.index, false)}>{ (Date.parse(new Date()) > Date.parse(new Date(stake.startTime * 1000)) + (stake.duration * 24 * 60 * 60 * 1000)) ? 'Claim' : 'Unstake' }</button>
                                                 }
                                             </td>
                                         </tr>
