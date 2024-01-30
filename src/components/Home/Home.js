@@ -469,7 +469,7 @@ function Home(props) {
                         </div>
                     </div>
 
-                    <p className="text-white mb-0">Balance: { inputsValues.balanceFormatted } KEY</p>
+                    <p className="text-color-2 mb-0">Balance: { inputsValues.balanceFormatted } KEY</p>
                 </div>
 
                 <div className="pb-5 px-1">
