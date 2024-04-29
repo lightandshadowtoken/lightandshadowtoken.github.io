@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 
 // images
 import logo from '../../img/logo.png';
+import bg from '../../img/bg.webp';
 
 function Home(props) {
     const contractAddress = '0x7230F3299c54A862214AF39Cd9BB876B06549859';
@@ -228,7 +229,7 @@ function Home(props) {
             } catch (error) {
                 handleCloseModalProcessing();
                 handleShowModalError();
-                document.getElementById('error-message').innerHTML = error.message;
+                document.getElementById('error-message').innerHTML = error;
             }
         } else {
             handleShowModalError();
@@ -341,50 +342,43 @@ function Home(props) {
     // }, []);
 
     return (
-        <div className="home bg-color-1">
-            <nav className="navbar bg-white navbar-expand-lg bg-body-tertiary py-2" style={{"borderBottom":"1px solid rgba(48, 50, 68, 0.3)"}}>
+        <div className="home background-image-cover" style={{backgroundImage:'url(' + bg + ')'}}>
+            <nav className="navbar bg-color-2 fixed-top navbar-dark navbar-expand-lg py-2" style={{"borderBottom":"1px solid rgba(48, 50, 68, 0.3)"}}>
                 <div className="container">
-                    <a className="navbar-brand text-white d-flex align-items-center" href="#">
+                    <a className="navbar-brand text-white d-flex align-items-center" href="https://lsglobal.io">
                         <div className="pe-4">
                             <img src={logo} width="50" alt="Light & Shadow" />
                         </div>
-                        <div className="text-color-2">LIGHT &amp; SHADOW STAKING</div>
                     </a>
 
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <a href={ "https://pancakeswap.finance/swap?inputCurrency=eth&outputCurrency=" + contractAddress } target="_blank" rel="noreferrer" className="btn btn-custom-3 px-4" >BUY LIGHT &amp; SHADOW</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item">
+                            <a href={ "https://pancakeswap.finance/swap?inputCurrency=eth&outputCurrency=" + contractAddress } target="_blank" rel="noreferrer" className="btn btn-custom-2 font-weight-500 px-4" style={{borderRadius:'8px'}}>Buy Light &amp; Shadow</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
 
             <div className="container py-5">
-                <div className="mb-5 py-4">
-                    <p className="font-size-200 text-color-2 poppins fw-bold text-center">Welcome to the Light And Shadow Token Staking Platform</p>
-                    <p className="font-size-140 text-color-2 text-center">Embark on a Journey of Profitable Staking</p>
-                    <p className="font-size-110 text-color-2 text-center">Discover the power of your investment with Light And Shadow Token. Our staking platform is designed to reward your commitment with competitive Annual Percentage Rates (APRs). Choose from our flexible staking options to best suit your financial goals.</p>
+                <div className="row justify-content-center justify-content-lg-start mb-5 pt-5 pb-4">
+                    <div className="col-xl-9 col-xxl-8 pt-5">
+                        <p className="font-size-180 font-size-md-260 font-size-lg-300 text-white text-color-2 poppins fw-bold text-center text-lg-start">Welcome to the Light And Shadow Token Staking Platform</p>
+                        <p className="font-size-140 text-white text-color-2 text-center text-lg-start">Embark on a Journey of Profitable Staking</p>
+                        <p className="font-size-110 text-white text-color-2 text-center text-lg-start">Discover the power of your investment with Light And Shadow Token. Our staking platform is designed to reward your commitment with competitive Annual Percentage Rates (APRs). Choose from our flexible staking options to best suit your financial goals.</p>
+                    </div>
                 </div>
 
                 <div className="row mb-5">
                     <div className="col-lg-4 mb-4 mb-lg-0">
-                        <div className="bg-white px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #071c1f"}}>
+                        <div className="bg-color-1 px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #5c7dff", borderRadius: "12px"}}>
                             <div className="row align-items-center">
                                 <div className="col-sm-9 col-lg-12 col-xl-9">
-                                    <p className="text-color-2 font-size-180 mb-0">{ inputsValues.totalStakedAmount } KEY</p>
-                                    <p className="text-color-2 font-size-100 mb-0">Staked Amount</p>
+                                    <p className="text-white font-size-180 mb-0">{ inputsValues.totalStakedAmount } KEY</p>
+                                    <p className="text-white font-size-100 mb-0">Staked Amount</p>
                                 </div>
                                 <div className="col-3 d-none d-sm-block d-lg-none d-xl-block">
                                     <div className="text-center">
-                                        <i className="fa-solid fa-steak font-size-400 text-color-3"></i>
+                                        <i className="fa-solid fa-steak font-size-400 text-color-2"></i>
                                     </div>
                                 </div>
                             </div>
@@ -392,15 +386,15 @@ function Home(props) {
                     </div>
 
                     <div className="col-lg-4 mb-4 mb-lg-0">
-                        <div className="bg-white px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #071c1f"}}>
+                        <div className="bg-color-1 px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #5c7dff", borderRadius: "12px"}}>
                             <div className="row align-items-center">
                                 <div className="col-sm-9 col-lg-12 col-xl-9">
-                                    <p className="text-color-2 font-size-180 mb-0">{ inputsValues.totalAccumulatedRewards } KEY</p>
-                                    <p className="text-color-2 font-size-100 mb-0">Accumulated Rewards</p>
+                                    <p className="text-white font-size-180 mb-0">{ inputsValues.totalAccumulatedRewards } KEY</p>
+                                    <p className="text-white font-size-100 mb-0">Accumulated Rewards</p>
                                 </div>
                                 <div className="col-3 d-none d-sm-block d-lg-none d-xl-block">
                                     <div className="text-center">
-                                        <i className="fa-solid fa-coins font-size-420 text-color-3"></i>
+                                        <i className="fa-solid fa-coins font-size-420 text-color-2"></i>
                                     </div>
                                 </div>
                             </div>
@@ -408,15 +402,15 @@ function Home(props) {
                     </div>
 
                     <div className="col-lg-4">
-                        <div className="bg-white px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #071c1f"}}>
+                        <div className="bg-color-1 px-4 px-sm-5 px-lg-4 px-xxl-5 py-5" style={{border: "1px solid #5c7dff", borderRadius: "12px"}}>
                             <div className="row align-items-center">
                                 <div className="col-sm-9 col-lg-12 col-xl-9">
-                                    <p className="text-color-2 font-size-180 mb-0">{ inputsValues.totalRewardsToBeReceived } KEY</p>
-                                    <p className="text-color-2 font-size-100 mb-0">Rewards By End Of Stake</p>
+                                    <p className="text-white font-size-180 mb-0">{ inputsValues.totalRewardsToBeReceived } KEY</p>
+                                    <p className="text-white font-size-100 mb-0">Rewards By End Of Stake</p>
                                 </div>
                                 <div className="col-3 d-none d-sm-block d-lg-none d-xl-block">
                                     <div className="text-center">
-                                        <i className="fa-solid fa-sack-dollar font-size-420 text-color-3"></i>
+                                        <i className="fa-solid fa-sack-dollar font-size-420 text-color-2"></i>
                                     </div>
                                 </div>
                             </div>
@@ -424,18 +418,18 @@ function Home(props) {
                     </div>
                 </div>
 
-                <div className="bg-color-1 p-4 p-sm-5 mb-5 bg-white" style={{border: "1px solid #071c1f"}}>
-                    <p className="text-color-2 poppins font-weight-700 font-size-150">Stake & Earn Today!</p>
-                    <p className="text-color-2 font-size-90 font-size-lg-80 font-size-xl-90">Explore diverse staking options tailored to your financial goals. Whether you're looking for short-term gains or long-term growth, we have the perfect plan for you.</p>
+                <div className="bg-color-1 p-4 p-sm-5 mb-5" style={{border: "1px solid #5c7dff", borderRadius: "12px"}}>
+                    <p className="text-white poppins font-weight-700 font-size-150">Stake & Earn Today!</p>
+                    <p className="text-white font-size-90 font-size-lg-80 font-size-xl-90">Explore diverse staking options tailored to your financial goals. Whether you're looking for short-term gains or long-term growth, we have the perfect plan for you.</p>
 
                     {
                         !inputsValues.addressIsConnected ?
                         <div className="mb-3">
-                            <button className="btn btn-custom-3 w-100 px-4 py-3" id="connect-wallet" onClick={connectWallet}>CONNECT WALLET</button>
+                            <button className="btn btn-custom-1 w-100 px-4 py-3" id="connect-wallet" onClick={connectWallet}>CONNECT WALLET</button>
                         </div>
                         :
                         <div className="mb-3">
-                            <div className="text-color-2 w-100 px-4 py-3" style={{"border":"1px solid rgb(48, 50, 68)"}}>Wallet Address:&nbsp;&nbsp;&nbsp;&nbsp;{ shortenAddress(6, 7, inputsValues.address) }</div>
+                            <div className="text-white w-100 px-4 py-3" style={{"border":"1px solid rgb(255, 255, 255)"}}>Wallet Address:&nbsp;&nbsp;&nbsp;&nbsp;{ shortenAddress(6, 7, inputsValues.address) }</div>
                         </div>
                     }
 
@@ -459,23 +453,23 @@ function Home(props) {
                     <div className="row px-1 mb-2">
                         <div className="col-lg-8 p-2">
                             <div className="position-relative">
-                                <div className="position-absolute text-color-2 cursor-pointer" onClick={inputMaxBalance} style={{"top":"16px", "right":"20px"}}>MAX</div>
-                                <input type="number" step="0" min="1" className="form-control form-control-1 ps-4 py-3" name="stakeAmount" placeholder="Enter Stake Amount" value={inputsValues.stakeAmount} onChange={handleInputChange} style={{"paddingRight":"70px"}} />
+                                <div className="position-absolute text-white cursor-pointer" onClick={inputMaxBalance} style={{"top":"16px", "right":"20px"}}>MAX</div>
+                                <input type="number" step="0" min="1" className="form-control form-control-1 text-white ps-4 py-3" name="stakeAmount" placeholder="Enter Stake Amount" value={inputsValues.stakeAmount} onChange={handleInputChange} style={{"paddingRight":"70px", "border":"1px solid rgb(255, 255, 255)"}} />
                             </div>
                         </div>
 
                         <div className="col-lg-4 p-2">
-                            <button className="btn btn-custom-3 w-100 px-4 py-3" onClick={stake}>STAKE</button>
+                            <button className="btn btn-custom-1 w-100 px-4 py-3" onClick={stake}>STAKE</button>
                         </div>
                     </div>
 
-                    <p className="text-color-2 mb-0">Balance: { inputsValues.balanceFormatted } KEY</p>
+                    <p className="text-white mb-0">Balance: { inputsValues.balanceFormatted } KEY</p>
                 </div>
 
                 <div className="pb-5 px-1">
-                    <p className="font-size-150 poppins font-weight-700 text-color-2 mb-3">Leaderboards</p>
+                    <p className="font-size-150 poppins font-weight-700 text-white mb-3">Leaderboards</p>
                     <div className="table-responsive">
-                        <table className="table text-color-2 mb-2 bg-white" style={{border: "1px solid #071c1f"}}>
+                        <table className="table text-white mb-2 bg-color-1">
                             <thead>
                                 <tr className="">
                                     <th className="text-center align-middle p-3">Rank</th>
@@ -506,9 +500,9 @@ function Home(props) {
                 </div>
 
                 <div className="pb-5 px-1">
-                    <p className="font-size-150 poppins font-weight-700 text-color-2 mb-3">Stake History</p>
+                    <p className="font-size-150 poppins font-weight-700 text-white mb-3">Stake History</p>
                     <div className="table-responsive">
-                        <table className="table text-color-2 mb-2 bg-white" style={{border: "1px solid #071c1f"}}>
+                        <table className="table text-white mb-2 bg-color-1">
                             <thead>
                                 <tr className="">
                                     <th className="text-center align-middle p-3">No.</th>
@@ -568,7 +562,7 @@ function Home(props) {
                         <i className="fas fa-check-circle font-size-400 text-color-2 mb-3"></i>
                         <p className="mb-0 font-size-110 mb-4 pb-2" id="success-message"></p>
 
-                        <button className="btn btn-custom-3 px-5 py-2 font-size-110 mx-1" onClick={handleCloseModalSuccess}>Okay</button>
+                        <button className="btn btn-custom-1 px-5 py-2 font-size-110 mx-1" onClick={handleCloseModalSuccess}>Okay</button>
                     </div>
                 </div>
             </Modal>
@@ -579,7 +573,7 @@ function Home(props) {
                         <i className="fas fa-times-circle font-size-400 text-color-2 mb-3"></i>
                         <p className="mb-0 font-size-110 mb-4 pb-2" id="error-message"></p>
 
-                        <button className="btn btn-custom-3 px-5 py-2 font-size-110 mx-1" onClick={handleCloseModalError}>Close</button>
+                        <button className="btn btn-custom-1 px-5 py-2 font-size-110 mx-1" onClick={handleCloseModalError}>Close</button>
                     </div>
                 </div>
             </Modal>
@@ -590,8 +584,8 @@ function Home(props) {
                         <i className="fas fa-exclamation-circle font-size-400 text-color-2 mb-3"></i>
                         <p className="mb-0 font-size-110 mb-4 inter pb-2">You are attempting to withdraw your stake ahead of the scheduled time, resulting in a penalty of <span>{ numberFormat(parseInt(ethers.utils.formatUnits(inputsValues.unstake.penalty, 'ether')), false) } KEY tokens</span>. After applying this penalty, you will receive a total of <span>{ numberFormat(inputsValues.unstake.totalWithdrawalAmount, false) } KEY tokens</span> from this withdrawal. Please review your decision to ensure that you understand the implications of this early withdrawal.</p>
 
-                        <button className="btn btn-custom-3 inter px-3 px-sm-5 py-2 font-size-100 mx-1" onClick={handleCloseModalPenalty}>Cancel</button>
-                        <button className="btn btn-custom-3 inter px-3 px-sm-5 py-2 font-size-100 mx-1" onClick={() => unstake(inputsValues.unstake.index, true)}>Proceed Anyway</button>
+                        <button className="btn btn-custom-1 inter px-3 px-sm-5 py-2 font-size-100 mx-1" onClick={handleCloseModalPenalty}>Cancel</button>
+                        <button className="btn btn-custom-1 inter px-3 px-sm-5 py-2 font-size-100 mx-1" onClick={() => unstake(inputsValues.unstake.index, true)}>Proceed Anyway</button>
                     </div>
                 </div>
             </Modal>

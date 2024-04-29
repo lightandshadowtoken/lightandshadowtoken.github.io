@@ -3,10 +3,7 @@
 .line-height-80{line-height:.8em!important;}.line-height-90{line-height:.9em!important}.line-height-100{line-height:1em!important}.line-height-110{line-height:1.1em!important}.line-height-120{line-height:1.2em!important}.line-height-130{line-height:1.3em!important}.line-height-140{line-height:1.4em!important}.line-height-150{line-height:1.5em!important}
 
 * {
-  font-family: "Nunito Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-variation-settings: "wdth" 100, "YTLC" 500;
+  font-family: "Poppins", sans-serif;
 }
 
 .poppins {
@@ -28,7 +25,7 @@
   color: #ffffff;
 }
 .text-color-2 {
-    color: #071c1f;
+    color: #363056;
 }
 .text-color-3 {
     color: #FF5A3C;
@@ -42,35 +39,35 @@
 /*  color: #00523e;*/
 /*}*/
 .bg-color-1 {
-  background-color: #F2F6F7;
+  background-color: #09032e;
 }
 .bg-color-2 {
-  background-color: #222222;
+  background-color: #050023;
 }
 .bg-color-3 {
   background-color: #FF5A3C;
 }
 .btn-custom-1 {
-  background-color: #ffffff;
-  color: #FF5A3C;
-  border:1px solid #FF5A3C;
+  background-color: #3772ff;
+  color: #ffffff;
+  border:1px solid #3772ff;
   border-radius: 0;
 }
 .btn-custom-1:hover, .btn-custom-1:focus, .btn-custom-1:active {
-  background-color: #e6e6e6;
-  color: #FF5A3C;
-  border:1px solid #FF5A3C;
+  background-color: #ffffff;
+  color: #3772ff;
+  border:1px solid #ffffff;
 }
 .btn-custom-2 {
   background-color: #ffffff;
-  color: #071c1f;
-  border: 2px solid #071c1f;
+  color: #283445;
+  border: 2px solid #ffffff;
   border-radius:0;
 }
 .btn-custom-2:hover, .btn-custom-2:focus, .btn-custom-2:active, .btn-custom-2.active {
-  background-color: #FF5A3C;
+  background-color: #3772ff;
   color: #ffffff;
-  border: 2px solid #FF5A3C;
+  border: 2px solid #3772ff;
   box-shadow: none;
 }
 .btn-custom-3 {
@@ -99,7 +96,6 @@
 }
 .form-control-1 {
   border: 1px solid rgb(48, 50, 68);
-  color: #071c1f!important;
   background-color: rgba(30, 31, 53, 0)!important;
   border-radius:0;
 }
